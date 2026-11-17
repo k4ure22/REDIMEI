@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f7">
+  <title>REDIMEI — Gestión de legalización de IMEI</title>
+  <meta name="description" content="REDIMEI: Gestión de legalización de IMEI a cualquier modelo. Precios bajos, garantía por registro y bloqueos instantáneos.">
+  <link rel="canonical" href="https://redimei.qd.je/">
+  <meta property="og:url" content="https://redimei.qd.je/">
+  <meta property="og:title" content="REDIMEI — Gestión de legalización de IMEI">
+  <meta property="og:description" content="Gestión de legalización de IMEI a cualquier modelo. Precios bajos, garantía por registro y bloqueos instantáneos.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Fondo animado con líneas curvas estilo neón morado sobre blanco Apple -->
+  <div class="bg-neon-curves" aria-hidden="true">
+    <svg class="neon-waves-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
+      <defs>
+        <linearGradient id="neonLinePrimary" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#9333ea" stop-opacity="0" />
+          <stop offset="24%" stop-color="#9333ea" stop-opacity="0.28" />
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="0.52" />
+          <stop offset="76%" stop-color="#9333ea" stop-opacity="0.24" />
+          <stop offset="100%" stop-color="#9333ea" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="neonLineSecondary" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0" />
+          <stop offset="30%" stop-color="#9333ea" stop-opacity="0.24" />
+          <stop offset="55%" stop-color="#7e22ce" stop-opacity="0.4" />
+          <stop offset="85%" stop-color="#c084fc" stop-opacity="0.2" />
+          <stop offset="100%" stop-color="#9333ea" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="monoCurve" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1d1d1f" stop-opacity="0" />
+          <stop offset="35%" stop-color="#1d1d1f" stop-opacity="0.06" />
+          <stop offset="65%" stop-color="#1d1d1f" stop-opacity="0.09" />
+          <stop offset="100%" stop-color="#1d1d1f" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <!-- Curvas estructurales monocromáticas -->
+      <path class="curve-mono curve-float-a" d="M-120 190 C 240 40, 560 350, 940 160 C 1200 30, 1410 150, 1580 100" stroke="url(#monoCurve)" stroke-width="1.5" />
+      <path class="curve-mono curve-float-b" d="M-100 720 C 260 540, 640 840, 1020 630 C 1260 500, 1420 660, 1580 590" stroke="url(#monoCurve)" stroke-width="1.5" />
+
+      <!-- Líneas curvas base con resplandor neón morado -->
+      <path class="curve-neon-base" d="M-140 280 C 180 110, 490 420, 820 240 C 1110 85, 1340 270, 1580 185" stroke="url(#neonLinePrimary)" stroke-width="1.8" />
+      <path class="curve-neon-base" d="M-120 560 C 220 710, 540 370, 880 540 C 1180 690, 1360 440, 1590 510" stroke="url(#neonLineSecondary)" stroke-width="1.8" />
+      <path class="curve-neon-base" d="M-100 830 C 310 660, 630 890, 990 710 C 1240 585, 1430 760, 1600 680" stroke="url(#neonLinePrimary)" stroke-width="1.4" />
+
+      <!-- Pulsos de energía neón viajando por las curvas -->
+      <path class="curve-neon-pulse curve-pulse-1" d="M-140 280 C 180 110, 490 420, 820 240 C 1110 85, 1340 270, 1580 185" stroke="#9333ea" stroke-width="2.4" stroke-linecap="round" />
+      <path class="curve-neon-pulse curve-pulse-2" d="M-120 560 C 220 710, 540 370, 880 540 C 1180 690, 1360 440, 1590 510" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round" />
+      <path class="curve-neon-pulse curve-pulse-3" d="M-100 830 C 310 660, 630 890, 990 710 C 1240 585, 1430 760, 1600 680" stroke="#9333ea" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <!-- Menú Lateral (Navigation Drawer) desde la derecha -->
+  <dialog class="Drawer" id="drawer" aria-label="Menú de navegación">
+    <div class="Drawer-scroller">
+      <nav class="Drawer-sheet" aria-label="Navegación principal">
+        <div class="Drawer-header">
+          <span class="wordmark-frame wordmark-frame--white Drawer-wordmark-frame">
+            <img
+              src="Files/tipoblanco.png"
+              alt="REDIMEI"
+              class="wordmark-img wordmark-img--white"
+              width="2000"
+              height="2000"
+            >
+          </span>
+          <button
+            id="drawer-close"
+            class="Drawer-close"
+            type="button"
+            aria-label="Cerrar menú"
+            autofocus
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <p class="Drawer-tagline">Gestión de legalización de IMEI a cualquier modelo</p>
+
+        <ul class="Drawer-nav">
+          <li>
+            <a href="#inicio" aria-current="page" data-drawer-link>
+              <span>Inicio</span>
+              <span class="Drawer-nav-meta">Principal</span>
+            </a>
+          </li>
+          <li>
+            <a href="#servicio-bloqueo" data-drawer-link>
+              <span>Bloqueo</span>
+              <span class="Drawer-nav-meta">Solo IMEI</span>
+            </a>
+          </li>
+          <li>
+            <a href="#servicio-registros" data-drawer-link>
+              <span>Registros</span>
+              <span class="Drawer-nav-meta">Garantía</span>
+            </a>
+          </li>
+          <li>
+            <a href="#servicio-homologacion" data-drawer-link>
+              <span>Homologación</span>
+              <span class="Drawer-nav-meta">Cualquier modelo</span>
+            </a>
+          </li>
+          <li>
+            <a href="#servicio-desbloqueo" data-drawer-link>
+              <span>Desbloqueo</span>
+              <span class="Drawer-nav-meta">Gratis</span>
+            </a>
+          </li>
+          <li>
+            <a href="#servicio-no-registro" data-drawer-link>
+              <span>Desbloqueo por no registro</span>
+              <span class="Drawer-nav-meta">Señal</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="Drawer-footer">
+          <div class="Drawer-contact-card">
+            <span class="Drawer-contact-label">Línea directa REDIMEI</span>
+            <strong class="Drawer-contact-number">305 755 6566</strong>
+          </div>
+          <a
+            href="https://wa.me/573057556566?text=Hola%20REDIMEI%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20IMEI."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-neon-purple Drawer-whatsapp-btn"
+          >
+            <span>Escribir por WhatsApp</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </dialog>
+
+  <!-- Zona Superior (Header translúcido estilo Apple) -->
+  <header class="site-header" id="inicio">
+    <div class="site-header-inner">
+      <div class="header-left">
+        <a href="#inicio" class="header-logo-link" aria-label="REDIMEI Inicio">
+          <span class="logo-frame header-logo-frame">
+            <img
+              src="Files/logonegro.png"
+              alt="Logo REDIMEI"
+              class="logo-img"
+              width="2000"
+              height="2000"
+            >
+          </span>
+        </a>
+      </div>
+
+      <div class="header-center">
+        <a href="#inicio" class="header-wordmark-link" aria-label="REDIMEI">
+          <span class="wordmark-frame wordmark-frame--black header-wordmark-frame">
+            <img
+              src="Files/tiponegro.png"
+              alt="REDIMEI"
+              class="wordmark-img wordmark-img--black"
+              width="2000"
+              height="2000"
+              fetchpriority="high"
+            >
+          </span>
+        </a>
+      </div>
+
+      <div class="header-right">
+        <button
+          id="drawer-open"
+          class="menu-trigger"
+          type="button"
+          aria-label="Abrir menú lateral"
+          aria-expanded="false"
+          aria-controls="drawer"
+        >
+          <span class="menu-trigger-label">Menú</span>
+          <span class="menu-trigger-icon" aria-hidden="true">
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <!-- Entrada Hero: tiponegro.png grande + texto directamente sobre fondo blanco Apple -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-brand-bar reveal-step" style="--stagger: 0;">
+        <div class="hero-wordmark-wrap">
+          <span class="wordmark-frame wordmark-frame--black hero-wordmark-frame">
+            <img
+              src="Files/tiponegro.png"
+              alt="REDIMEI"
+              class="wordmark-img wordmark-img--black"
+              width="2000"
+              height="2000"
+              fetchpriority="high"
+            >
+          </span>
+        </div>
+        <div class="hero-brand-divider" aria-hidden="true"></div>
+        <p class="hero-brand-subtitle">
+          Gestión de legalización de IMEI a cualquier modelo
+        </p>
+      </div>
+
+      <!-- Layout estilo Apple: Tarjeta Principal al centro + 3 puntos clave limpios en los laterales -->
+      <div class="hero-layout">
+        <!-- Tarjeta Negra Principal (Space Black) -->
+        <article class="service-card service-card--hero card-tone-bloqueo reveal-step" id="servicio-bloqueo" style="--stagger: 1;">
+          <div class="card-chrome-glow" aria-hidden="true"></div>
+          <svg class="card-liquid card-liquid--top" viewBox="0 0 260 150" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="chromeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+                <stop offset="45%" stop-color="#8b8b94" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#141418" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M-20 -10 C 30 95, 115 110, 185 35 C 215 4, 240 -10, 260 -15 L -20 -15 Z" fill="url(#chromeTop)" />
+            <path d="M12 -10 C 48 68, 110 78, 156 26" stroke="rgba(255,255,255,0.34)" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <svg class="card-liquid card-liquid--bottom" viewBox="0 0 280 200" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="chromeBottom" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
+                <stop offset="50%" stop-color="#7c7c85" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#09090b" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M295 215 L 105 215 C 125 145, 175 112, 225 78 C 258 55, 278 20, 295 5 Z" fill="url(#chromeBottom)" />
+            <path d="M150 205 C 170 148, 212 120, 260 80" stroke="rgba(255,255,255,0.28)" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+
+          <div class="service-card-inner">
+            <div class="card-top-brand">
+              <span class="wordmark-frame wordmark-frame--white card-wordmark-frame">
+                <img
+                  src="Files/tipoblanco.png"
+                  alt="REDIMEI"
+                  class="wordmark-img wordmark-img--white"
+                  width="2000"
+                  height="2000"
+                >
+              </span>
+            </div>
+
+            <div class="card-center-copy">
+              <h1 id="hero-title" class="card-headline card-headline--hero">¿CLIENTES MOROSOS?</h1>
+              <p class="card-description card-description--hero">
+                Bloqueamos Nacional e Internacionalmente el imei que quieras, lo puedes desbloquear gratis en cualquier momento
+              </p>
+              <p class="card-imei-note">
+                Para el bloqueo solo se necesita el IMEI
+              </p>
+            </div>
+
+            <div class="card-action-row">
+              <button
+                type="button"
+                class="card-cta-trigger"
+                data-service="Bloqueo de IMEI"
+                data-modal-title="Solicitar bloqueo de IMEI"
+                data-modal-subtitle="Para el bloqueo solo se necesita el IMEI. Puedes desbloquear el equipo gratis en cualquier momento."
+                data-show-scope="true"
+                data-imei-only="true"
+              >
+                <span class="card-cta-text">Solicitar bloqueo</span>
+                <svg class="card-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lateral Izquierdo Minimalista Apple -->
+        <aside class="side-panel side-panel--left reveal-step" aria-label="Ventajas de precio y garantía" style="--stagger: 2;">
+          <div class="apple-pillar-card">
+            <span class="apple-pillar-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </span>
+            <span class="apple-pillar-label">Precios bajos</span>
+          </div>
+
+          <div class="apple-pillar-card">
+            <span class="apple-pillar-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </span>
+            <span class="apple-pillar-label">Garantía por registro</span>
+          </div>
+        </aside>
+
+        <!-- Lateral Derecho Minimalista Apple -->
+        <aside class="side-panel side-panel--right reveal-step" aria-label="Velocidad de bloqueo" style="--stagger: 3;">
+          <div class="apple-pillar-card">
+            <span class="apple-pillar-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </span>
+            <span class="apple-pillar-label">Bloqueos instantáneos</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Bento Grid de servicios adicionales (Cada tarjeta con su propio tono de negro Apple) -->
+    <section class="services-section" aria-label="Otros servicios REDIMEI">
+      <div class="services-grid">
+        <!-- 1. Registros (Dark Obsidian) -->
+        <article class="service-card service-card--sub card-tone-registros reveal-step" id="servicio-registros" style="--stagger: 2;">
+          <div class="card-chrome-glow" aria-hidden="true"></div>
+          <div class="service-card-inner">
+            <div class="card-top-brand">
+              <span class="wordmark-frame wordmark-frame--white card-wordmark-frame--sub">
+                <img
+                  src="Files/tipoblanco.png"
+                  alt="REDIMEI"
+                  class="wordmark-img wordmark-img--white"
+                  width="2000"
+                  height="2000"
+                  loading="lazy"
+                >
+              </span>
+            </div>
+
+            <div class="card-center-copy">
+              <h2 class="card-headline card-headline--sub">REGISTROS</h2>
+              <p class="card-description">
+                Evita el bloqueo de tu teléfono por no registro, Registros garantizados.
+              </p>
+            </div>
+
+            <div class="card-action-row">
+              <button
+                type="button"
+                class="card-cta-trigger"
+                data-service="Registros de IMEI"
+                data-modal-title="Solicitar registro de IMEI"
+                data-modal-subtitle="Evita el bloqueo de tu teléfono por no registro. Envía el IMEI y modelo para tramitar un registro garantizado."
+                data-show-scope="false"
+                data-imei-only="false"
+              >
+                <span class="card-cta-text">Solicitar registro</span>
+                <svg class="card-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Homologación (Midnight) -->
+        <article class="service-card service-card--sub card-tone-homologacion reveal-step" id="servicio-homologacion" style="--stagger: 3;">
+          <div class="card-chrome-glow" aria-hidden="true"></div>
+          <div class="service-card-inner">
+            <div class="card-top-brand">
+              <span class="wordmark-frame wordmark-frame--white card-wordmark-frame--sub">
+                <img
+                  src="Files/tipoblanco.png"
+                  alt="REDIMEI"
+                  class="wordmark-img wordmark-img--white"
+                  width="2000"
+                  height="2000"
+                  loading="lazy"
+                >
+              </span>
+            </div>
+
+            <div class="card-center-copy">
+              <h2 class="card-headline card-headline--sub">HOMOLOGACIÓN</h2>
+              <p class="card-description">
+                Homologamos cualquier modelo para que opere sin restricciones en todas las redes del país
+              </p>
+            </div>
+
+            <div class="card-action-row">
+              <button
+                type="button"
+                class="card-cta-trigger"
+                data-service="Homologación de IMEI"
+                data-modal-title="Solicitar homologación"
+                data-modal-subtitle="Compártenos el IMEI y modelo del dispositivo para realizar el trámite de homologación completo."
+                data-show-scope="false"
+                data-imei-only="false"
+              >
+                <span class="card-cta-text">Solicitar homologación</span>
+                <svg class="card-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Desbloqueo (Titanium Dark) -->
+        <article class="service-card service-card--sub card-tone-desbloqueo reveal-step" id="servicio-desbloqueo" style="--stagger: 4;">
+          <div class="card-chrome-glow" aria-hidden="true"></div>
+          <div class="service-card-inner">
+            <div class="card-top-brand">
+              <span class="wordmark-frame wordmark-frame--white card-wordmark-frame--sub">
+                <img
+                  src="Files/tipoblanco.png"
+                  alt="REDIMEI"
+                  class="wordmark-img wordmark-img--white"
+                  width="2000"
+                  height="2000"
+                  loading="lazy"
+                >
+              </span>
+            </div>
+
+            <div class="card-center-copy">
+              <h2 class="card-headline card-headline--sub">DESBLOQUEO</h2>
+              <p class="card-description">
+                Desbloqueamos equipos al instante y sin costo en cualquier momento cuando tu cliente esté al día
+              </p>
+            </div>
+
+            <div class="card-action-row">
+              <button
+                type="button"
+                class="card-cta-trigger"
+                data-service="Desbloqueo de IMEI"
+                data-modal-title="Solicitar desbloqueo"
+                data-modal-subtitle="Ingresa el IMEI y modelo del equipo para retirar el bloqueo de inmediato cuando tu cliente esté al día."
+                data-show-scope="false"
+                data-imei-only="false"
+              >
+                <span class="card-cta-text">Solicitar desbloqueo</span>
+                <svg class="card-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Desbloqueo por no registro (Graphite) -->
+        <article class="service-card service-card--sub card-tone-no-registro reveal-step" id="servicio-no-registro" style="--stagger: 5;">
+          <div class="card-chrome-glow" aria-hidden="true"></div>
+          <div class="service-card-inner">
+            <div class="card-top-brand">
+              <span class="wordmark-frame wordmark-frame--white card-wordmark-frame--sub">
+                <img
+                  src="Files/tipoblanco.png"
+                  alt="REDIMEI"
+                  class="wordmark-img wordmark-img--white"
+                  width="2000"
+                  height="2000"
+                  loading="lazy"
+                >
+              </span>
+            </div>
+
+            <div class="card-center-copy">
+              <h2 class="card-headline card-headline--sub">DESBLOQUEO POR NO REGISTRO</h2>
+              <p class="card-description">
+                Recuperamos la señal de equipos bloqueados por falta de registro ante el operador
+              </p>
+            </div>
+
+            <div class="card-action-row">
+              <button
+                type="button"
+                class="card-cta-trigger"
+                data-service="Desbloqueo por no registro"
+                data-modal-title="Desbloqueo por no registro"
+                data-modal-subtitle="Envía el IMEI y modelo del dispositivo para reactivar su señal y completar el registro pendiente."
+                data-show-scope="false"
+                data-imei-only="false"
+              >
+                <span class="card-cta-text">Solicitar desbloqueo</span>
+                <svg class="card-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sección final con botón directo a WhatsApp y mensaje de cierre -->
+    <section class="bottom-cta-section reveal-step" aria-label="Contacto directo REDIMEI" style="--stagger: 6;">
+      <a
+        href="https://wa.me/573057556566?text=Hola%20REDIMEI%2C%20quiero%20preguntar%20por%20sus%20precios%20y%20servicios%20garantizados."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-neon-purple bottom-whatsapp-btn"
+      >
+        <span>Contactar por WhatsApp</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <p class="closing-statement">
+        Somos tienda virtual, trabajos garantizados, pregunta por nuestros precios ahora!!
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark-frame wordmark-frame--black footer-wordmark-frame">
+          <img
+            src="Files/tiponegro.png"
+            alt="REDIMEI"
+            class="wordmark-img wordmark-img--black"
+            width="2000"
+            height="2000"
+            loading="lazy"
+          >
+        </span>
+        <span class="footer-note">Línea directa: 305 755 6566</span>
+      </div>
+      <span class="footer-tagline">Tienda virtual · Gestión de legalización de IMEI</span>
+    </div>
+  </footer>
+
+  <!-- Modal interactivo macOS para solicitar cualquier servicio -->
+  <dialog class="Modal" id="bloqueo-modal" aria-labelledby="modal-title" closedby="any">
+    <div class="Modal-surface">
+      <div class="Modal-header">
+        <span class="wordmark-frame wordmark-frame--white Modal-wordmark-frame">
+          <img
+            src="Files/tipoblanco.png"
+            alt="REDIMEI"
+            class="wordmark-img wordmark-img--white"
+            width="2000"
+            height="2000"
+          >
+        </span>
+        <button
+          type="button"
+          class="Modal-close"
+          id="modal-close"
+          aria-label="Cerrar solicitud"
+          autofocus
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="Modal-service-pill" id="modal-service-badge">Bloqueo de IMEI</div>
+      <h2 id="modal-title" class="Modal-title">Solicitar bloqueo de IMEI</h2>
+      <p class="Modal-subtitle" id="modal-subtitle">
+        Para el bloqueo solo se necesita el IMEI. Puedes desbloquear el equipo gratis en cualquier momento.
+      </p>
+
+      <form id="bloqueo-form" class="Modal-form">
+        <input type="hidden" id="servicio-input" name="servicio" value="Bloqueo de IMEI">
+
+        <div class="Form-field">
+          <label for="imei-input">Número de IMEI (15 dígitos)</label>
+          <input
+            type="text"
+            id="imei-input"
+            name="imei"
+            inputmode="numeric"
+            pattern="[0-9]{15}"
+            maxlength="15"
+            placeholder="Ej. 354829104829104"
+            required
+          >
+        </div>
+
+        <div class="Form-row" id="modal-form-row">
+          <div class="Form-field" id="modelo-field">
+            <label for="modelo-input">Modelo del equipo</label>
+            <input
+              type="text"
+              id="modelo-input"
+              name="modelo"
+              placeholder="Ej. iPhone 15 Pro / Galaxy S24"
+            >
+          </div>
+          <div class="Form-field" id="alcance-field">
+            <label for="alcance-select">Alcance del bloqueo</label>
+            <select id="alcance-select" name="alcance">
+              <option value="Nacional e Internacional (Blacklist)">Nacional + Internacional</option>
+              <option value="Bloqueo Nacional">Solo Nacional</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="Modal-actions">
+          <button type="button" class="btn-ghost-dark" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="btn-neon-purple">
+            <span>Enviar por WhatsApp</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
